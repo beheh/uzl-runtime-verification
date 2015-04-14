@@ -40,10 +40,18 @@ public class QuadraticTest {
 
     @Test
     public void testNonNumeric() {
-        assertEquals("Invalid string as parameter", "Invalid",
+        assertEquals("Invalid string instead of parameter", "Invalid",
                 Quadratic.roots("1 2 Luebeck"));
         assertEquals("Invalid dangling string", "Invalid",
                 Quadratic.roots("1 2 Luebeck 3"));
+    }
+    
+    @Test
+    public void testInvalidNumbers() {
+        assertEquals("Invalid number", "Invalid",
+                Quadratic.roots("1 2 3.0."));
+        assertEquals("Invalid number", "Invalid",
+                Quadratic.roots("1 2 3..0"));
     }
 
     /* I'll admit that this and the following test are *slightly* unfair,
@@ -70,6 +78,12 @@ public class QuadraticTest {
         assertEquals("Solution for 0 2 3 is -1.5", "-1.5",
                 Quadratic.roots("0 2 3"));
     }
+    
+    @Test
+    public void testNoSolution() {
+        assertEquals("No solution for 0 0 3", "",
+                Quadratic.roots("0 0 3"));
+    }
 
     @Test
     public void testZeroDiscriminant() {
@@ -84,10 +98,11 @@ public class QuadraticTest {
     }
 
     @Test
-    public void testResultRounding() {
-        // more precise solutions are -2.61803 and -0.38193
+    public void testRounding() {
         assertEquals("Solutions for 1 3 1 are -2.618 and -0.382", "-2.618 -0.382",
-                Quadratic.roots("1 3 1"));
+                Quadratic.roots("1 3 1")); // more precise solutions are -2.61803 and -0.38193
+        assertEquals("Solutions for 5 6 1 are -1 and -0.2", "-1 -0.2",
+                Quadratic.roots("5 6 1"));
     }
 
     @Test
@@ -130,11 +145,11 @@ public class QuadraticTest {
     @Test
     public void testTrailingSpecialCharacters() {
         assertEquals("Trailing tab should make result invalid", "Invalid",
-                Quadratic.roots("2 -4 -16   \t"));
+                Quadratic.roots("2 -4 -16 \t"));
     }
 
     @Test
-    public void testSorting() {
+    public void testOrdering() {
         assertEquals("Solutions for 2 -4 -16 are -2 and 4 (in order)", "-2 4",
                 Quadratic.roots("2 -4 -16"));
         assertEquals("Solutions for 2 4 -16 are -4 and 2 (in order)", "-4 2",
@@ -145,5 +160,7 @@ public class QuadraticTest {
     public void testMultiline() {
         assertEquals("Multiline solutions", "-2 4\n-4 2",
                 Quadratic.roots("2 -4 -16\n2 4 -16"));
+        assertEquals("Multiline solutions with some invalid lines", "Invalid\n-2 4",
+                Quadratic.roots("1 2 3 4\n2 -4 -16"));
     }
 }
