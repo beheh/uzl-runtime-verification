@@ -126,20 +126,20 @@ public class QuadraticTest {
 
     @Test
     public void testLeadingSpaces() {
-        assertEquals("Leading spaces should be invalid", "Invalid",
+        assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4", "-2 4",
                 Quadratic.roots("   2 -4 -16"));
+    }
+    
+    @Test
+    public void testTrailingSpaces() {
+        assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4", "-2 4",
+                Quadratic.roots("2 -4 -16   "));
     }
 
     @Test
     public void testMultipleSpaces() {
         assertEquals("Multiple spaces should be allowed", "-2 4",
                 Quadratic.roots("2  -4  -16"));
-    }
-
-    @Test
-    public void testTrailingSpaces() {
-        assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4 (in order)", "-2 4",
-                Quadratic.roots("2 -4 -16   "));
     }
 
     @Test

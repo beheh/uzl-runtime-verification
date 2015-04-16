@@ -93,6 +93,9 @@ public class Quadratic {
                             doubles = new Double[1];
                             doubles[0] = (-c / b);
                         }
+                        else if(c == 0) {
+                            throw new RuntimeException("infinite solutions exist");
+                        }
                         // we don't handle 0 0 0 since we can't print all solutions (infinite many) anyway => undefined behaviour
                     } else {
                         double discriminant = Math.pow(b, 2) - (4 * a * c);
