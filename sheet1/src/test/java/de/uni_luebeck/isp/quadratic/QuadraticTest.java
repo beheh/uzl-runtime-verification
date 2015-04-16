@@ -126,13 +126,15 @@ public class QuadraticTest {
 
     @Test
     public void testInfiniteSolutions() {
+        // as per email from 2014-04-16
         assertEquals("Infinite solutions for 0 0 0", "Invalid",
                 Quadratic.roots("0 0 0"));
     }
 
     @Test
     public void testLeadingSpaces() {
-        assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4", "-2 4",
+        // as per email from 2014-04-16
+        assertEquals("Roots of 2 -4 -16 with leading spaces must be -2 and 4", "-2 4",
                 Quadratic.roots("   2 -4 -16"));
     }
 
