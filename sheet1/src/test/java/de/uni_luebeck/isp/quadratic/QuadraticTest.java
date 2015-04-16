@@ -45,7 +45,7 @@ public class QuadraticTest {
         assertEquals("Invalid dangling string", "Invalid",
                 Quadratic.roots("1 2 Luebeck 3"));
     }
-    
+
     @Test
     public void testInvalidNumbers() {
         assertEquals("Invalid number", "Invalid",
@@ -78,7 +78,7 @@ public class QuadraticTest {
         assertEquals("Solution for 0 2 3 is -1.5", "-1.5",
                 Quadratic.roots("0 2 3"));
     }
-    
+
     @Test
     public void testNoSolution() {
         assertEquals("No solution for 0 0 3", "",
@@ -125,11 +125,17 @@ public class QuadraticTest {
     }
 
     @Test
+    public void testInfiniteSolutions() {
+        assertEquals("Infinite solutions for 0 0 0", "Invalid",
+                Quadratic.roots("0 0 0"));
+    }
+
+    @Test
     public void testLeadingSpaces() {
         assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4", "-2 4",
                 Quadratic.roots("   2 -4 -16"));
     }
-    
+
     @Test
     public void testTrailingSpaces() {
         assertEquals("Roots of 2 -4 -16 with trailing spaces must be -2 and 4", "-2 4",

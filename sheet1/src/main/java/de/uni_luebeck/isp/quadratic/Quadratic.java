@@ -50,7 +50,7 @@ public class Quadratic {
                     double[] parsed = new double[3];
                     int k = 0; // number or parsed parameters
                     int n = 0; // position at which the current active number starts
-                    boolean numberActive = true;
+                    boolean numberActive = false;
                     for (int i = 0; i < line.length(); i++) {
                         if (!numberActive && line.charAt(i) != Quadratic.FIELD_SEPARATOR) {
                             // reached a new number
