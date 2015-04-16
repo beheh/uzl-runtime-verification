@@ -106,6 +106,13 @@ public class QuadraticTest {
     }
 
     @Test
+    public void testFractions() {
+        assertEquals("Solution for 4.5 -1 0.05555555 is 0.1111", "0.1111",
+                Quadratic.roots("4.5 -1 0.05555555"));
+    }
+
+    
+    @Test
     public void testSeparator() {
         assertEquals("Separating tabs should be invalid", "Invalid",
                 Quadratic.roots("2\t-4\t-16"));
