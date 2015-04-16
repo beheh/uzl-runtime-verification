@@ -68,7 +68,8 @@ public class Quadratic {
                                     throw new Exception("parameter has dangling whitespace characters");
                                 }
                                 Double current = Double.parseDouble(toParse);
-                                if (current.isNaN() || current.isInfinite()) {
+                                if (!Double.isFinite(current)) {
+									// this is due to parseDouble happily parsing non-real numbers (like the strings "Infinity" and "NaN")
                                     throw new Exception("parameter is not a real number");
                                 }
                                 parsed[k++] = current; // will throw an IndexOutOfBoundsException once we've reached a 4th parameter
