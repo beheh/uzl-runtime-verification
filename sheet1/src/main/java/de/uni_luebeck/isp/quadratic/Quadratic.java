@@ -119,8 +119,18 @@ public class Quadratic {
                         if (d.isNaN() || d.isInfinite()) {
                             continue;
                         }
+						// format result
+						String string = formatter.format(d);
+						// -0 doesn't make sense
+						if("-0".equals(string)) {
+							string = "0";
+						}
+						// check for string duplicates
+						if(formatted.contains(string)) {
+							continue;
+						}
                         // LinkedHashSet preserves order and prevents duplicates
-                        formatted.add(formatter.format(d));
+                        formatted.add(string);
                     }
 
                     results.add(String.join(" ", formatted));

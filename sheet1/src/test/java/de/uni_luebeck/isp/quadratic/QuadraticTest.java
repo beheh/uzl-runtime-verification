@@ -178,4 +178,10 @@ public class QuadraticTest {
         assertEquals("Multiline solutions with some invalid lines", "Invalid\n-2 4",
                 Quadratic.roots("1 2 3 4\n2 -4 -16"));
     }
+
+	@Test
+	public void testIdenticalAfterRounding() {
+		assertEquals("Multiple solutions", "0",
+				Quadratic.roots("10000000000 0 -1"));
+	}
 }
