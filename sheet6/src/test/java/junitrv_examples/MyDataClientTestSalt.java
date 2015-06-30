@@ -55,9 +55,9 @@ public class MyDataClientTestSalt {
             //Always(implies(addPatient, Until(not(addedPatient), modify)))
             );
 
-	// Monitor ensuring that addPatient is called between 2 and 6 times
+	// Monitor ensuring that addPatient is called more than 2 but less than 6 times
     private static final Monitor addPatientBetweenTwoAndSix = new SaltMonitor(
-            "always(addPatient implies (false))"
+            "always(opened implies ((not close) until holding[3..5]addPatient))"
             );
 
     
@@ -93,8 +93,9 @@ public class MyDataClientTestSalt {
     }
     
     @Test
-	@Monitors({ "addPatientBetweenTwoAndSix"})
+	@Monitors({"addPatientBetweenTwoAndSix"})
     public void test4() {
+        System.out.println("test4");
         DataService service = new MyDataService("http://myserver");
         MyDataClient client = new MyDataClient(service);
         client.authenticate("malte");
