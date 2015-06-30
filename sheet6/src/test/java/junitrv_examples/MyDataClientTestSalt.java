@@ -45,14 +45,19 @@ public class MyDataClientTestSalt {
 
     // Monitor ensuring that authenticate is called before any read or modify
     private static final Monitor authenticateBeforeReadOrModify = new SaltMonitor(
-            "not (read or modify) until weak authenticate"
+            "(not (read or modify)) until weak authenticate"
             //WU(not(or(read, modify)), authenticate)
             );
     
     // Monitor ensuring that addPatient calls modify before returning
-     private static final Monitor addPatientModifies = new SaltMonitor(
-             "always(addPatient implies (not addedPatient until modify))"
+    private static final Monitor addPatientModifies = new SaltMonitor(
+            "always(addPatient implies ((not addedPatient) until modify))"
             //Always(implies(addPatient, Until(not(addedPatient), modify)))
+            );
+
+	// Monitor ensuring that addPatient is called between 2 and 6 times
+    private static final Monitor addPatientBetweenTwoAndSix = new SaltMonitor(
+            "always(addPatient implies (false))"
             );
 
     
@@ -82,10 +87,13 @@ public class MyDataClientTestSalt {
     public void test3() {
         DataService service = new MyDataService("http://myserver");
         MyDataClient client = new MyDataClient(service);
+        client.authenticate("normann");
         client.getPatientFile("miller-2143-1");
+        client.exit();
     }
     
     @Test
+	@Monitors({ "addPatientBetweenTwoAndSix"})
     public void test4() {
         DataService service = new MyDataService("http://myserver");
         MyDataClient client = new MyDataClient(service);
